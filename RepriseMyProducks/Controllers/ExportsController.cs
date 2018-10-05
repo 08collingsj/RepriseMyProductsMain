@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,15 +19,14 @@ namespace RepriseMyProducks.Controllers
         [Route("api/Brands")]
         public IEnumerable<Dtos.Brand> GetBrands()
         {
-
             return db.Brands
-                     .AsEnumerable()
-                     .Select(b => new Dtos.Brand
-                     {
+                        .AsEnumerable()
+                        .Where(x => x.Active)
+                        .Select(b => new Dtos.Brand
+                        {
                         Id = b.Id,
-                        Name = b.Name,
-                        Active = b.Active
-                     });
+                        Name = b.Name
+                        });
         }
 
         //Get: api/Categories
@@ -38,11 +36,11 @@ namespace RepriseMyProducks.Controllers
         {
             return db.Categories
                 .AsEnumerable()
+                .Where(x => x.Active)
                 .Select(b => new Dtos.Category
                 {
                     Name = b.Name,
-                    Description = b.Description,
-                    Active = b.Active
+                    Description = b.Description
                 });
         }
 
@@ -51,14 +49,13 @@ namespace RepriseMyProducks.Controllers
         [Route("api/Products")]
         public IEnumerable<Dtos.Product> GetProducts()
         {
-            return db.Products.AsEnumerable()
+            return db.Products.AsEnumerable().Where(x => x.Active)
                 .Select(p => new Dtos.Product
                 {
                     Name = p.Name,
                     Description = p.Description,
                     Price = p.Price,
                     StockLevel = p.StockLevel,
-                    Active = p.Active
                 });
         }
 

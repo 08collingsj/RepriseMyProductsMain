@@ -17,7 +17,7 @@ namespace RepriseMyProducks.Controllers
         // GET: Brands
         public ActionResult Index()
         {
-            return View(db.Brands.ToList());
+            return View(db.Brands.Where(x => x.Active).ToList());   
         }
 
         // GET: Brands/Details/5

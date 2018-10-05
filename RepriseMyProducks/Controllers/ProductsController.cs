@@ -17,7 +17,7 @@ namespace RepriseMyProducks.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
+            var products = db.Products.Include(p => p.Brand).Include(p => p.Category).Where(x => x.Active);
             return View(products.ToList());
         }
 

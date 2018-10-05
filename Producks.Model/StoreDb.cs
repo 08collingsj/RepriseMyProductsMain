@@ -30,11 +30,11 @@ namespace Producks.Model
             Property(p => p.Name).IsRequired();
             Property(p => p.Description).IsRequired();
 
-            HasRequired(p => p.Category)
+            HasRequired(p => p.Name)
                 .WithMany()
                 .HasForeignKey(p => p.CategoryId);
 
-            HasRequired(p => p.Brand)
+            HasRequired(p => p.Name)
                 .WithMany()
                 .HasForeignKey(p => p.BrandId);
         }
@@ -62,18 +62,18 @@ namespace Producks.Model
             {
                 var categories = new List<Category>()
                 {
-                    new Category { Name = "Covers", Description = "Davison Stores pride ourselves on our poor range of covers for your mobile device at premium prices.  If you're lukcy your phone or tablet will be protected from any dents, scratches and scuffs.", Active = true },
-                    new Category { Name = "Case", Description = "Browse our wide range of cases for phones and tablets that will help you to keep your mobile device protected from the elements.", Active = false },
-                    new Category { Name = "Accessories", Description = "We stock a small range of phone and tablet accessories, including car holders, sports armbands, stylus pens and very little else.", Active = true },
-                    new Category { Name = "Screen Protectors", Description = "Exclusive Davison Stores screen protectors for your phone or tablet.", Active = true }
+                    new Category { Name = "Covers", Description = "Davison Stores pride ourselves on our poor range of covers for your mobile device at premium prices.  If you're lukcy your phone or tablet will be protected from any dents, scratches and scuffs."},
+                    new Category { Name = "Case", Description = "Browse our wide range of cases for phones and tablets that will help you to keep your mobile device protected from the elements."},
+                    new Category { Name = "Accessories", Description = "We stock a small range of phone and tablet accessories, including car holders, sports armbands, stylus pens and very little else."},
+                    new Category { Name = "Screen Protectors", Description = "Exclusive Davison Stores screen protectors for your phone or tablet."}
                 };
                 categories.ForEach(c => context.Categories.Add(c));
 
                 var brands = new List<Brand>()
                 {
-                    new Brand { Name = "Soggy Sponge", Active = true },
-                    new Brand { Name = "Damp Squib", Active = false },
-                    new Brand { Name = "iStuff-R-Us", Active = true }
+                    new Brand { Name = "Soggy Sponge"},
+                    new Brand { Name = "Damp Squib"},
+                    new Brand { Name = "iStuff-R-Us"}
                 };
                 brands.ForEach(b => context.Brands.Add(b));
 
